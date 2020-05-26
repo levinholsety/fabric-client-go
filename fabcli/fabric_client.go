@@ -16,8 +16,8 @@ type FabricClient struct {
 }
 
 // Execute executes operations on fabric.
-func (c *FabricClient) Execute(channelID string, executor func(ctx *ChannelContext) error) error {
-	sdk, err := fabsdk.New(config.FromFile(c.ConfigPath))
+func (p *FabricClient) Execute(channelID string, executor func(ctx *ChannelContext) error) error {
+	sdk, err := fabsdk.New(config.FromFile(p.ConfigPath))
 	if err != nil {
 		return err
 	}
@@ -26,7 +26,7 @@ func (c *FabricClient) Execute(channelID string, executor func(ctx *ChannelConte
 	if err != nil {
 		return err
 	}
-	ctx, err := c.channelContext(sdk, mspClient, channelID)
+	ctx, err := p.channelContext(sdk, mspClient, channelID)
 	if err != nil {
 		return err
 	}
@@ -34,8 +34,8 @@ func (c *FabricClient) Execute(channelID string, executor func(ctx *ChannelConte
 }
 
 // ChannelIDs returns all channel ID of current fabric.
-func (c *FabricClient) ChannelIDs() (channelIDs []string, err error) {
-	sdk, err := fabsdk.New(config.FromFile(c.ConfigPath))
+func (p *FabricClient) ChannelIDs() (channelIDs []string, err error) {
+	sdk, err := fabsdk.New(config.FromFile(p.ConfigPath))
 	if err != nil {
 		return
 	}
